@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Room Finder - Contact Us</title>
+  <style>
+    
+    :root {
+      --primary-color: #e63946;
+      --hover-color: #c92c3b;
+      --bg-color: #f8f9fa;
+      --text-color: #333;
+      --card-bg: #ffffff;
+      --shadow-light: rgba(0, 0, 0, 0.1);
+      --shadow-medium: rgba(0, 0, 0, 0.08);
+    }
+
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+
+    header {
+      background: var(--primary-color);
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 100;
+      box-shadow: 0 2px 5px var(--shadow-light);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-btn {
+      color: #fff;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+
+    .menu-btn {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #fff;
+      padding: 0.5rem;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .menu-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+
+    .mobile-nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 90;
+      display: none;
+    }
+
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 280px;
+      height: 100%;
+      background: var(--primary-color);
+      color: white;
+      box-shadow: -4px 0 10px var(--shadow-light);
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 95;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 1rem;
+    }
+
+    .mobile-nav.active {
+      transform: translateX(0);
+    }
+
+    .mobile-nav .close-btn {
+      font-size: 2rem;
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
+      align-self: flex-end;
+      margin-bottom: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .mobile-nav .close-btn:hover {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .mobile-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .mobile-nav ul li {
+      margin-bottom: 1rem;
+    }
+
+    .mobile-nav ul li a {
+      display: block;
+      padding: 0.8rem 1rem;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    .mobile-nav ul li a:hover {
+      background: var(--hover-color);
+    }
+
+
+    
+    .content-container {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px var(--shadow-medium);
+      flex-grow: 1;
+    }
+
+    .content-container h2 {
+      color: var(--primary-color);
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .content-container p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .contact-info ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .contact-info ul li {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .contact-info ul li strong {
+      margin-right: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .contact-form label {
+      font-weight: 600;
+      color: #555;
+    }
+
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      width: 100%;
+      box-sizing: border-box; 
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-form input[type="text"]:focus,
+    .contact-form input[type="email"]:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.2);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .contact-form button {
+      background: var(--primary-color);
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      width: auto;
+      align-self: flex-start;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .contact-form button:hover {
+      background: var(--hover-color);
+      transform: translateY(-2px);
+    }
+
+    /* Footer styles */
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      margin-top: auto;
+      font-size: 0.9rem;
+      box-shadow: 0 -2px 5px var(--shadow-light);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+      }
+      header h1 {
+        font-size: 1.5rem;
+      }
+      .nav-links {
+        display: none;
+      }
+      .menu-btn {
+        display: block;
+      }
+      .content-container {
+        margin: 2rem 1rem;
+        padding: 1.5rem;
+      }
+      .content-container h2 {
+        font-size: 1.8rem;
+      }
+      .content-container p, .contact-info ul li {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .mobile-nav {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Room Finder</h1>
+  <nav class="nav-links" id="navLinks">
+    <a href="index.html" class="nav-btn">Home</a>
+    <a href="about.html" class="nav-btn">About Us</a>
+    <a href="contact.html" class="nav-btn">Contact Us</a>
+    <a href="login.html" class="nav-btn">Login</a>
+    <a href="signup.html" class="nav-btn">Sign Up</a>
+  </nav>
+  <div class="menu-btn" id="menuBtn">☰</div>
+
+  <div id="mobileNavOverlay" class="mobile-nav-overlay"></div>
+  <nav class="mobile-nav" id="mobileNav">
+    <button class="close-btn" id="closeNavBtn">✕</button>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="signup.html">Sign Up</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="content-container">
+  <h2>Contact Us</h2>
+  <p>We'd love to hear from you! Whether you have questions, feedback, or need assistance, our team is here to help. Feel free to reach out to us through any of the following methods:</p>
+
+  <div class="contact-info">
+    <ul>
+      <li><strong>Email:</strong> myproject653@gmail.com</li>
+      <li><strong>Phone:</strong> +977 9841000000</li>
+      <li><strong>Address:</strong> Kathmandu</li>
+    </ul>
+  </div>
+
+  <h3>Send Us a Message</h3>
+  <form class="contact-form" action="#" method="POST">
+    <label for="name">Your Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Your Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="subject">Subject:</label>
+    <input type="text" id="subject" name="subject" required>
+
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" required></textarea>
+
+    <button type="submit">Send Message</button>
+  </form>
+</div>
+
+<footer>
+  <p>&copy; <?php echo date("Y"); ?> Roomfinder. All rights reserved.</p>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  const closeNavBtn = document.getElementById('closeNavBtn');
+  const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+
+  menuBtn.addEventListener('click', () => {
+    mobileNav.classList.add('active');
+    mobileNavOverlay.style.display = 'block';
+  });
+
+  closeNavBtn.addEventListener('click', () => {
+    mobileNav.classList.remove('active');
+    mobileNavOverlay.style.display = 'none';
+  });
+
+  mobileNavOverlay.addEventListener('click', () => {
+    mobileNav.classList.remove('active');
+    mobileNavOverlay.style.display = 'none';
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+body {
+  margin: 0;
+  padding: 0;
+  background: #edf2f7;
+  font-family: Arial, sans-serif;
+}
+
+.login-box {
+  width: 350px;
+  padding: 40px;
+  background: #fff;
+  border-radius: 10px;
+  margin: 100px auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.login-box h2 {
+  margin-bottom: 10px;
+}
+
+.login-box label {
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+  font-size: 0.95em;
+  color: #333;
+}
+
+.login-box input, .login-box select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+}
+
+.show-password {
+  display: flex;
+  align-items: center;
+  font-size: 0.95em;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.login-box button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+
+.login-box button[type="submit"]:hover {
+  background-color: #d32f2f;
+}
+
+.links {
+  margin-top: 18px;
+  font-size: 0.95em;
+  color: #666;
+}
+
+.links a {
+  color: #f44336;
+  text-decoration: none;
+  margin: 0 6px;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}.show-password {
+  display: flex;
+  align-items: center;
+  font-size: 0.95em;
+  margin-bottom: 10px;
+  color: #555;
+  gap: 8px; 
+}
+.show-password input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Login</h2>
+    <p>Please log in to continue</p>
+    <form action="login.php" method="POST" onsubmit="return validateForm()">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" placeholder="Email" required>
+
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" placeholder="Password" required>
+
+      <div class="show-password">
+        <input type="checkbox" id="showPwd" onclick="togglePassword()">
+        <label for="showPwd">Show Password</label>
+      </div>
+
+      <label for="role">Select Role</label>
+      <select name="role" id="role" required>
+        <option value="">-- Choose Role --</option>
+        <option value="owner">Room Owner</option>
+        <option value="seeker">Room Seeker</option>
+      </select>
+
+      <button type="submit">Log in</button>
+    </form>
+
+    <div class="links">
+      <a href="forgot-password.html">Forgot Password?</a> | <a href="signup.html">Sign Up</a>
+    </div>
+  </div>
+
+  <script>
+function validateForm() {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const role = document.getElementById("role").value;
+
+  if (!email || !password || !role) {
+    alert("Please fill out all fields and select a role.");
+    return false;
+  }
+  return true;
+}
+
+function togglePassword() {
+  const pwd = document.getElementById("password");
+  pwd.type = pwd.type === "password" ? "text" : "password";
+}
+  </script>
+</body>
+</html>

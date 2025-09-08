@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign Up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      background: #edf2f7;
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .signup-box {
+      width: 350px;
+      padding: 40px;
+      background: #fff;
+      border-radius: 10px;
+      margin: 80px auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    .signup-box h2 {
+      margin-bottom: 10px;
+      color: #e53935;
+    }
+    .signup-box label {
+      display: block;
+      text-align: left;
+      margin-bottom: 5px;
+      font-size: 0.95em;
+      color: #333;
+    }
+    .signup-box input, .signup-box select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+    .show-password {
+      display: flex;
+      align-items: center;
+      font-size: 0.95em;
+      margin-bottom: 10px;
+      color: #555;
+    }
+    .signup-box button[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background-color: #e53935;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+    .signup-box button[type="submit"]:hover {
+      background-color: #b71c1c;
+    }
+    .links {
+      margin-top: 18px;
+      font-size: 0.95em;
+      color: #666;
+    }
+    .links a {
+      color: #e53935;
+      text-decoration: none;
+      margin: 0 6px;
+    }
+    .links a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 420px) {
+      .signup-box {
+        width: 98vw;
+        padding: 18px;
+        margin: 40px auto;
+      }
+    }
+    .show-password {
+  display: flex;
+  align-items: center;
+  font-size: 0.95em;
+  margin-bottom: 10px;
+  color: #555;
+  gap: 8px; 
+}
+.show-password input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+  </style>
+</head>
+<body>
+  <div class="signup-box">
+    <h2>Sign Up</h2>
+    <p>Create your account</p>
+    <form id="signupForm" action="signup.php" method="POST" onsubmit="return validateSignUp()">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" placeholder="Email" required>
+
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" placeholder="Password" required>
+
+      <label for="confirm-password">Confirm Password</label>
+      <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password" required>
+
+      <label for="role">Select Role</label>
+      <select name="role" id="role" required>
+        <option value="">-- Choose Role --</option>
+        <option value="owner">Room Owner</option>
+        <option value="seeker">Room Seeker</option>
+      </select>
+
+      <div class="show-password">
+        <input type="checkbox" id="showPwd" onclick="togglePassword()">
+        <label for="showPwd" style="margin-left:7px;cursor:pointer;">Show Passwords</label>
+      </div>
+
+      <button type="submit">Sign Up</button>
+    </form>
+    <div class="links">
+      Already have an account? <a href="login.html">Log in</a>
+    </div>
+  </div>
+  <script>
+    function validateSignUp() {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const confirmPassword = document.getElementById("confirm-password").value.trim();
+      const role = document.getElementById("role").value;
+      if (!email || !password || !confirmPassword || !role) {
+        alert("Please fill out all fields.");
+        return false;
+      }
+      if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return false;
+      }
+      return true;
+    }
+    function togglePassword() {
+      var pwd = document.getElementById("password");
+      var confirmPwd = document.getElementById("confirm-password");
+      pwd.type = pwd.type === "password" ? "text" : "password";
+      confirmPwd.type = confirmPwd.type === "password" ? "text" : "password";
+    }
+  </script>
+</body>
+</html>
